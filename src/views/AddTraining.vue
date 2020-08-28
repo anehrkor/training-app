@@ -63,17 +63,17 @@
     <div class="set-training-type p-3 border bg-light">
       A form to add a new training type will be added here.
     </div>
-    <InputField v-model="date" label="Date" placeholder="Enter date" />
-    <InputField v-model="time" label="Time" placeholder="Enter time" />
+    <BaseInputField v-model="date" label="Date" placeholder="Enter date" />
+    <BaseInputField v-model="time" label="Time" placeholder="Enter time" />
   </div>
 </template>
 
 <script>
-import InputField from "../components/InputField.vue";
+import BaseInputField from "../components/BaseInputField.vue";
 
 export default {
-  name: "input-field-test",
-  components: { InputField }
+  name: "base-input-field-test",
+  components: { BaseInputField }
 };
 </script>
 

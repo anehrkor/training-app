@@ -63,8 +63,8 @@
     <div class="set-training-type p-3 border bg-light">
       A form to add a new training type will be added here.
     </div>
-    <BaseInputField v-model="date" label="Date" placeholder="Enter date" />
-    <BaseInputField v-model="time" label="Time" placeholder="Enter time" />
+    <BaseInputField label="Date" placeholder="Enter date" />
+    <BaseInputField label="Time" placeholder="Enter time" />
   </div>
 </template>
 

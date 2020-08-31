@@ -1,6 +1,6 @@
 <template>
-  <form class="input-field-date">
-    <label for="input-field-date-label">{{ label }}</label>
+  <form>
+    <label for="date-label">{{ label }}</label>
     <p>
       <input
         type="text"

@@ -6,48 +6,55 @@
         Add a training
       </h3>
       <div class="add-training p-3 border bg-light" style="overflow: hidden">
-        <div style="float:left; padding:5px">
-          <InputFieldDate
-            label="Date"
-            v-model="date"
-            @keydown="dateKeydown($event)"
-          />
+        <div class="row">
+          <div class="form-group col-md-3">
+            <InputFieldDate
+              label="Date"
+              v-model="date"
+              @keydown="dateKeydown($event)"
+            />
+          </div>
+          <div class="form-group col-md-3">
+            <InputFieldTime
+              label="Start"
+              v-model="time"
+              @keydown="timeKeydown($event)"
+            />
+          </div>
+          <div class="form-group col-md-3">
+            <InputFieldTime
+              label="Finish"
+              v-model="time"
+              @keydown="timeKeydown($event)"
+            />
+          </div>
+          <div class="form-group col-md-3">
+            <InputFieldTrainingChoice
+              label="Training type"
+              selectDefault="Choose type"
+              v-model="choices"
+            />
+          </div>
+          <div class="form-group col-md-3">
+            <InputFieldText
+              label="Comment"
+              placeholder="Enter comment"
+              v-model="text"
+              @keydown="textKeydown($event)"
+            />
+          </div>
         </div>
-        <div style="float:left; padding:5px">
-          <InputFieldTime
-            label="Start"
-            v-model="time"
-            @keydown="timeKeydown($event)"
-          />
-        </div>
-        <div style="float:left; padding:5px">
-          <InputFieldTime
-            label="Finish"
-            v-model="time"
-            @keydown="timeKeydown($event)"
-          />
-        </div>
-        <div style="float:left; padding:5px">
-          <InputFieldChoice
-            label="Training type"
-            selectDefault="Choose type"
-            v-model="choices"
-          />
-        </div>
-        <div style="float:left; padding:5px">
-          <InputFieldText
-            label="Comment"
-            placeholder="Enter comment"
-            v-model="text"
-            @keydown="textKeydown($event)"
-          />
-        </div>
-        <div class="form-row" style="float:left">
+        <!-- Work in progress -->
+        <div style="float:left">
           <button type="button" class="btn btn-secondary">
             Add exercise
           </button>
         </div>
-        <div class="form-row" style="float:right">
+        <div style="float:left">
+          <ExerciseFieldRow />
+        </div>
+        <!-- -->
+        <div style="float:right">
           <button type="submit" class="btn btn-primary">
             Add training
           </button>
@@ -67,13 +74,15 @@
 import InputFieldDate from "@/components/InputFieldDate.vue";
 import InputFieldTime from "@/components/InputFieldTime.vue";
 import InputFieldText from "@/components/InputFieldText.vue";
-import InputFieldChoice from "@/components/InputFieldChoice.vue";
+import InputFieldTrainingChoice from "@/components/InputFieldTrainingChoice.vue";
+import ExerciseFieldRow from "@/components/ExerciseFieldRow.vue";
 export default {
   components: {
     InputFieldDate,
     InputFieldTime,
     InputFieldText,
-    InputFieldChoice
+    InputFieldTrainingChoice,
+    ExerciseFieldRow
   },
   data: function() {
     return {

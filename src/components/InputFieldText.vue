@@ -1,6 +1,6 @@
 <template>
-  <form class="input-field-text">
-    <label for="input-field-text-label">{{ label }}</label>
+  <form>
+    <label for="text-label">{{ label }}</label>
     <p>
       <textarea
         :placeholder="placeholder"

@@ -1,6 +1,6 @@
 <template>
-  <form class="input-field-time">
-    <label for="input-field-time-label">{{ label }}</label>
+  <form>
+    <label for="time-label">{{ label }}</label>
     <p>
       <input
         type="text"

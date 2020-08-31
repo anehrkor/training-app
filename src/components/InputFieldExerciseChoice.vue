@@ -1,6 +1,6 @@
 <template>
-  <form class="input-field-choice">
-    <label for="input-field-choice-label">{{ label }}</label>
+  <form>
+    <label for="exercise-choice">{{ label }}</label>
     <p>
       <select>
         <option disabled value="">{{ selectDefault }}</option>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "input-field-choice",
+  name: "input-field-exercise-choice",
   props: {
     label: { type: String, required: false, default: "" },
     selectDefault: { type: String, required: false, default: "" }

@@ -1,12 +1,16 @@
 <template>
   <form class="input-field-text">
     <label for="input-field-text-label">{{ label }}</label>
-    <input
-      type="text"
-      :placeholder="placeholder"
-      v-model="text"
-      maxlength="140"
-    />
+    <p>
+      <textarea
+        :placeholder="placeholder"
+        v-model="text"
+        maxlength="140"
+        width="100%"
+        padding="5px"
+      >
+      </textarea>
+    </p>
   </form>
 </template>
 
@@ -14,8 +18,8 @@
 export default {
   name: "input-field-text",
   props: {
-    label: { type: String, required: false, default: "Text" },
-    placeholder: { type: String, required: false, default: "Enter text" }
+    label: { type: String, required: false, default: "" },
+    placeholder: { type: String, required: false, default: "" }
   },
   data: function() {
     return {

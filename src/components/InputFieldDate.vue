@@ -1,12 +1,15 @@
 <template>
   <form class="input-field-date">
     <label for="input-field-date-label">{{ label }}</label>
-    <input
-      type="text"
-      :placeholder="placeholder"
-      v-model="date"
-      maxlength="10"
-    />
+    <p>
+      <input
+        type="text"
+        :placeholder="placeholder"
+        v-model="date"
+        maxlength="10"
+        size="10"
+      />
+    </p>
   </form>
 </template>
 
@@ -14,8 +17,8 @@
 export default {
   name: "input-field-date",
   props: {
-    label: { type: String, required: false, default: "Date" },
-    placeholder: { type: String, required: false, default: "Enter date" }
+    label: { type: String, required: false, default: "" },
+    placeholder: { type: String, required: false, default: "" }
   },
   data: function() {
     return {

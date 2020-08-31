@@ -5,56 +5,53 @@
       <h3 style="text-align:left; padding:10px; margin:auto; width:75%">
         Add a training
       </h3>
-      <div class="add-training p-3 border bg-light">
-        <form class="p-3">
-          <div class="form-row">
-            <div class="form-col px-md-2" style="width:15%">
-              <label for="inputDate">Date</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Enter date..."
-              />
-            </div>
-            <div class="form-col px-md-2" style="width:15%">
-              <label for="inputStartTime">Started at</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Enter time..."
-              />
-            </div>
-            <div class="form-col px-md-2" style="width:15%">
-              <label for="inputEndTime">Finished at</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Enter time..."
-              />
-            </div>
-            <div class="form-col px-md-2" style="width:15%">
-              <label for="inputType">Training type</label>
-              <select id="inputType" class="form-control">
-                <option selected>Choose type...</option>
-                <option>Push day</option>
-                <option>Pull day</option>
-                <option>Leg day</option>
-              </select>
-            </div>
-            <div class="form-col px-md-2" style="width:40%">
-              <label for="inputComment">Comment</label>
-              <textarea
-                class="form-control"
-                placeholder="Enter comment..."
-              ></textarea>
-            </div>
-          </div>
-          <div class="form-row">
-            <button type="submit" class="btn btn-primary">
-              Add training
-            </button>
-          </div>
-        </form>
+      <div class="add-training p-3 border bg-light" style="overflow: hidden">
+        <div style="float:left; padding:5px">
+          <InputFieldDate
+            label="Date"
+            v-model="date"
+            @keydown="dateKeydown($event)"
+          />
+        </div>
+        <div style="float:left; padding:5px">
+          <InputFieldTime
+            label="Start"
+            v-model="time"
+            @keydown="timeKeydown($event)"
+          />
+        </div>
+        <div style="float:left; padding:5px">
+          <InputFieldTime
+            label="Finish"
+            v-model="time"
+            @keydown="timeKeydown($event)"
+          />
+        </div>
+        <div style="float:left; padding:5px">
+          <InputFieldChoice
+            label="Training type"
+            selectDefault="Choose type"
+            v-model="choices"
+          />
+        </div>
+        <div style="float:left; padding:5px">
+          <InputFieldText
+            label="Comment"
+            placeholder="Enter comment"
+            v-model="text"
+            @keydown="textKeydown($event)"
+          />
+        </div>
+        <div class="form-row" style="float:left">
+          <button type="button" class="btn btn-secondary">
+            Add exercise
+          </button>
+        </div>
+        <div class="form-row" style="float:right">
+          <button type="submit" class="btn btn-primary">
+            Add training
+          </button>
+        </div>
       </div>
     </div>
     <h3 style="text-align:left; padding:10px; margin:auto; width:75%">
@@ -63,35 +60,6 @@
     <div class="set-training-type p-3 border bg-light">
       A form to add a new training type will be added here.
     </div>
-    <InputFieldDate
-      label="Date"
-      placeholder="Enter date"
-      v-model="date"
-      @keydown="dateKeydown($event)"
-    />
-    <InputFieldTime
-      label="Start"
-      placeholder="Enter start time"
-      v-model="time"
-      @keydown="timeKeydown($event)"
-    />
-    <InputFieldTime
-      label="Finish"
-      placeholder="Enter finish time"
-      v-model="time"
-      @keydown="timeKeydown($event)"
-    />
-    <InputFieldChoice
-      label="Training type"
-      selectDefault="Choose type"
-      v-model="choices"
-    />
-    <InputFieldText
-      label="Comment"
-      placeholder="Enter text"
-      v-model="text"
-      @keydown="textKeydown($event)"
-    />
   </div>
 </template>
 

@@ -24,13 +24,13 @@ export default {
   },
   watch: {
     text(val) {
-      this.text = val.replace(/\W/g, "");
+      this.text = val.replace(/[^(a-zA-Z0-9):.!?'"&()/;öäüß-]/gi, "");
     }
   },
   methods: {
     // taken from https://stackoverflow.com/questions/50566430/vue-js-how-to-restrict-special-characters-in-an-input-field
     textKeydown(e) {
-      if (/^\W$/.test(e.key)) {
+      if (/[^(a-zA-Z0-9):.!?'"&()/;öäüß-]/.test(e.key)) {
         e.preventDefault();
       }
     }

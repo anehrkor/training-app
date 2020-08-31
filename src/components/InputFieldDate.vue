@@ -24,13 +24,13 @@ export default {
   },
   watch: {
     date(val) {
-      this.date = val.replace(/\W/g, "");
+      this.date = val.replace(/[^(0-9).]/gi, "");
     }
   },
   methods: {
     // taken from https://stackoverflow.com/questions/50566430/vue-js-how-to-restrict-special-characters-in-an-input-field
     dateKeydown(e) {
-      if (/^\W$/.test(e.key)) {
+      if (/[^(0-9).]/.test(e.key)) {
         e.preventDefault();
       }
     }

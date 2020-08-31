@@ -70,10 +70,21 @@
       @keydown="dateKeydown($event)"
     />
     <InputFieldTime
-      label="Time"
-      placeholder="Enter time"
+      label="Start"
+      placeholder="Enter start time"
       v-model="time"
       @keydown="timeKeydown($event)"
+    />
+    <InputFieldTime
+      label="Finish"
+      placeholder="Enter finish time"
+      v-model="time"
+      @keydown="timeKeydown($event)"
+    />
+    <InputFieldChoice
+      label="Training type"
+      selectDefault="Choose type"
+      v-model="choices"
     />
     <InputFieldText
       label="Comment"
@@ -88,13 +99,20 @@
 import InputFieldDate from "@/components/InputFieldDate.vue";
 import InputFieldTime from "@/components/InputFieldTime.vue";
 import InputFieldText from "@/components/InputFieldText.vue";
+import InputFieldChoice from "@/components/InputFieldChoice.vue";
 export default {
-  components: { InputFieldDate, InputFieldTime, InputFieldText },
+  components: {
+    InputFieldDate,
+    InputFieldTime,
+    InputFieldText,
+    InputFieldChoice
+  },
   data: function() {
     return {
       date: "",
       time: "",
-      text: ""
+      text: "",
+      choices: []
     };
   }
 };

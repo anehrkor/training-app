@@ -5,7 +5,7 @@
       type="text"
       :placeholder="placeholder"
       v-model="time"
-      maxlength="4"
+      maxlength="5"
     />
   </form>
 </template>
@@ -24,13 +24,13 @@ export default {
   },
   watch: {
     time(val) {
-      this.time = val.replace(/\W/g, "");
+      this.time = val.replace(/[^(0-9):]/gi, "");
     }
   },
   methods: {
     // taken from https://stackoverflow.com/questions/50566430/vue-js-how-to-restrict-special-characters-in-an-input-field
     timeKeydown(e) {
-      if (/^\W$/.test(e.key)) {
+      if (/[^(0-9):]/.test(e.key)) {
         e.preventDefault();
       }
     }

@@ -1,16 +1,29 @@
 <template>
-  <form>
+  <div>
     <div class="row">
-      <div class="form-group col-md-3">
+      <div class="form-group col-md">
         <InputFieldExerciseChoice
           label="Exercise"
           selectDefault="Choose exercise"
           v-model="exerciseChoices"
         />
       </div>
-      <SetInputFields setLabel="Set 1" />
+      <div class="form-group col-md-6">
+        <SetInputFields setLabel="Set 1" />
+      </div>
+      <div>
+        <SetInputFields setLabel="Set 2" />
+      </div>
+      <div class="form-group col-md">
+        <button
+          class="btn btn-secondary float-right"
+          title="Click to add an exercise"
+        >
+          &nbsp;Add a set
+        </button>
+      </div>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>

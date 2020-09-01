@@ -1,20 +1,20 @@
 <template>
-  <form>
-    <div>
+  <div>
+    <div class="row">
       <span style="text-align:center; margin:auto">
         {{ setLabel }}
       </span>
     </div>
     <div class="row">
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <InputFieldBase
-          label="Ordering"
+          label="#"
           v-model="input"
           inputMaxLength="2"
           inputSize="2"
         />
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <InputFieldBase
           label="Weight"
           v-model="input"
@@ -22,7 +22,7 @@
           inputSize="6"
         />
       </div>
-      <div class="form-group col-md-3">
+      <div class="form-group col-md-4">
         <InputFieldBase
           label="Reps"
           v-model="input"
@@ -31,7 +31,7 @@
         />
       </div>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>

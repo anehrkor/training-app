@@ -2,13 +2,7 @@
   <form>
     <label for="text-label">{{ label }}</label>
     <p>
-      <textarea
-        :placeholder="placeholder"
-        v-model="text"
-        maxlength="140"
-        width="100%"
-        padding="5px"
-      >
+      <textarea :placeholder="placeholder" v-model="text" maxlength="140">
       </textarea>
     </p>
   </form>

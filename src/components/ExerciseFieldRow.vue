@@ -5,7 +5,7 @@
         <InputFieldExerciseChoice
           label="Exercise"
           selectDefault="Choose exercise"
-          v-model="choices"
+          v-model="exerciseChoices"
         />
       </div>
       <SetInputFields setLabel="Set 1" />
@@ -20,7 +20,7 @@ export default {
   name: "exercise-field-row",
   components: { InputFieldExerciseChoice, SetInputFields },
   data: function() {
-    return { choices: [] };
+    return { exerciseChoices: [] };
   }
 };
 </script>

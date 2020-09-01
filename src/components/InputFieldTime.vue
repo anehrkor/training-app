@@ -7,7 +7,6 @@
         :placeholder="placeholder"
         v-model="time"
         maxlength="5"
-        size="5"
       />
     </p>
   </form>

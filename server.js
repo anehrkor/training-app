@@ -1,8 +1,14 @@
 const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 const serveStatic = require("serve-static");
 const path = require("path");
 
 const app = express();
+
+// configure to use cors and body-parser
+app.use(cors());
+app.use(bodyParser.json());
 
 //here we are configuring dist to serve app files
 app.use("/", serveStatic(path.join(__dirname, "/dist")));

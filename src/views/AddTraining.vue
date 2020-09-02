@@ -45,13 +45,25 @@
               />
             </div>
           </div>
-          <div>
-            <ExerciseFieldRow />
+          <div v-for="(exercise, index) in exercises" :key="index">
+            <div class="form-group col-md-auto">
+              <ExerciseFieldRow />
+            </div>
+            <div class="form-group col-md-auto">
+              <button
+                class="btn btn-secondary btn-sm float-right"
+                title="Click to remove an exercise"
+                @click="removeExercise(index)"
+              >
+                &nbsp;Remove exercise
+              </button>
+            </div>
           </div>
           <br />
           <button
             class="btn btn-secondary float-right"
             title="Click to add an exercise"
+            @click="addExercise"
           >
             &nbsp;Add exercise
           </button>
@@ -83,8 +95,18 @@ export default {
       date: "",
       time: "",
       trainingChoices: [],
-      text: ""
+      text: "",
+      exercises: []
     };
+  },
+  methods: {
+    addExercise: function() {
+      var nExercise = (this.exercises.length + 1).toString();
+      this.exercises.push({ exerciseNumber: nExercise });
+    },
+    removeExercise: function(index) {
+      this.exercises.splice(index, 1);
+    }
   }
 };
 </script>

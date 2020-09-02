@@ -1,25 +1,34 @@
 <template>
   <div>
     <div class="row">
-      <div class="form-group col-md">
+      <div class="form-group col-md-auto">
         <InputFieldExerciseChoice
           label="Exercise"
           selectDefault="Choose exercise"
           v-model="exerciseChoices"
         />
       </div>
-      <div class="form-group col-md-6">
-        <SetInputFields setLabel="Set 1" />
+      <div v-for="(set, index) in sets" :key="index">
+        <div class="form-group col-md-auto">
+          <SetInputFields :setLabel="set.setNumber" />
+        </div>
+        <div class="form-group col-md-auto">
+          <button
+            class="btn btn-secondary btn-sm float-right"
+            title="Click to remove a set"
+            @click="removeSet(index)"
+          >
+            &nbsp;-
+          </button>
+        </div>
       </div>
-      <div>
-        <SetInputFields setLabel="Set 2" />
-      </div>
-      <div class="form-group col-md">
+      <div class="form-group col-md-auto">
         <button
-          class="btn btn-secondary float-right"
-          title="Click to add an exercise"
+          class="btn btn-secondary btn-sm float-right"
+          title="Click to add a set"
+          @click="addSet"
         >
-          &nbsp;Add a set
+          &nbsp;+
         </button>
       </div>
     </div>
@@ -33,7 +42,16 @@ export default {
   name: "exercise-field-row",
   components: { InputFieldExerciseChoice, SetInputFields },
   data: function() {
-    return { exerciseChoices: [] };
+    return { exerciseChoices: [], sets: [] };
+  },
+  methods: {
+    addSet: function() {
+      var nSet = "Set " + (this.sets.length + 1).toString();
+      this.sets.push({ setNumber: nSet });
+    },
+    removeSet: function(index) {
+      this.sets.splice(index, 1);
+    }
   }
 };
 </script>

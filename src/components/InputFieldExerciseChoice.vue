@@ -2,8 +2,8 @@
   <form>
     <label for="exercise-choice">{{ label }}</label>
     <p>
-      <select>
-        <option disabled value="">{{ selectDefault }}</option>
+      <select @change="onChange($event)">
+        <option value="">{{ selectDefault }}</option>
         <option
           v-for="exerciseChoice in exerciseChoices"
           :key="exerciseChoice"
@@ -24,8 +24,14 @@ export default {
   data: function() {
     return {
       // must somehow be replaced by service call to database in the future
-      exerciseChoices: ["A", "B", "C"]
+      exerciseChoices: ["A", "B", "C"],
+      selectedExercise: ""
     };
+  },
+  methods: {
+    onChange(event) {
+      this.selectedExercise = event.target.value;
+    }
   }
 };
 </script>

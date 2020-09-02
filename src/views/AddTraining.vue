@@ -33,7 +33,7 @@
               <InputFieldTrainingChoice
                 label="Training type"
                 selectDefault="Choose type"
-                v-model="trainingChoices"
+                v-model="selectedTraining"
               />
             </div>
             <div class="form-group col-md-4">
@@ -94,7 +94,7 @@ export default {
     return {
       date: "",
       time: "",
-      trainingChoices: [],
+      selectedTraining: "",
       text: "",
       exercises: []
     };

@@ -5,7 +5,7 @@
         <InputFieldExerciseChoice
           label="Exercise"
           selectDefault="Choose exercise"
-          v-model="exerciseChoices"
+          v-model="selectedExercise"
         />
       </div>
       <div v-for="(set, index) in sets" :key="index">
@@ -42,7 +42,7 @@ export default {
   name: "exercise-field-row",
   components: { InputFieldExerciseChoice, SetInputFields },
   data: function() {
-    return { exerciseChoices: [], sets: [] };
+    return { selectedExercise: "", sets: [] };
   },
   methods: {
     addSet: function() {

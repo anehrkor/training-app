@@ -22,7 +22,7 @@ export default {
   },
   watch: {
     text(val) {
-      this.text = val.replace(/[^(a-zA-Z0-9):.!?'"&()/;öäüß-]/gi, "");
+      this.text = val.replace(/[^(a-zA-Z0-9):.!?'"&()/;öäüß-\s]/gi, "");
     }
   },
   methods: {

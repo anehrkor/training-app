@@ -1,5 +1,5 @@
 {
-  "name": "training-app",
+  "name": "training-app-client",
   "version": "0.1.0",
   "private": true,
   "scripts": {

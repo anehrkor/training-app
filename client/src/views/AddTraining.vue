@@ -18,14 +18,14 @@
             <div class="form-group col-md-2">
               <InputFieldTime
                 label="Started at"
-                v-model="time"
+                v-model="startTime"
                 @keydown="timeKeydown($event)"
               />
             </div>
             <div class="form-group col-md-2">
               <InputFieldTime
                 label="Finished at"
-                v-model="time"
+                v-model="endTime"
                 @keydown="timeKeydown($event)"
               />
             </div>
@@ -70,18 +70,22 @@
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">
+    <button type="submit" class="btn btn-primary" @click="addTrainig">
       Add training
     </button>
   </div>
 </template>
 
 <script>
+// import components
 import InputFieldDate from "@/components/InputFieldDate.vue";
 import InputFieldTime from "@/components/InputFieldTime.vue";
 import InputFieldTrainingChoice from "@/components/InputFieldTrainingChoice.vue";
 import InputFieldText from "@/components/InputFieldText.vue";
 import ExerciseFieldRow from "@/components/ExerciseFieldRow.vue";
+// import services
+import AddTrainingService from "@/services/AddTrainingService.js";
+
 export default {
   components: {
     InputFieldDate,
@@ -93,7 +97,8 @@ export default {
   data: function() {
     return {
       date: "",
-      time: "",
+      startTime: "",
+      endTime: "",
       selectedTraining: "",
       text: "",
       exercises: []
@@ -106,6 +111,18 @@ export default {
     },
     removeExercise: function(index) {
       this.exercises.splice(index, 1);
+    },
+    async addTrainig() {
+      const response = await AddTrainingService.addTraining({
+        // TODO: figure out why this.date is always empty
+        /*date: this.date,
+        startTime: this.startTime,
+        endTime: this.endTime*/
+        date: "13.09.2020",
+        startTime: "07:00",
+        endTime: "06:00"
+      });
+      console.log(response.data);
     }
   }
 };

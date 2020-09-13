@@ -9,9 +9,13 @@ app.use(morgan("combined"));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/status", (req, res) => {
+app.post("/addTraining", (req, res) => {
+  /* TODO:
+  - add field requirements
+  - add field validations
+  */
   res.send({
-    message: "Hello"
+    message: `Your training from ${req.body.date} was saved.`
   });
 });
 

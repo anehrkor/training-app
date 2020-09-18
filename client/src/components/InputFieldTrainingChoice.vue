@@ -13,6 +13,9 @@
 </template>
 
 <script>
+// import services
+import AddTrainingService from "@/services/AddTrainingService.js";
+
 export default {
   name: "input-field-training-choice",
   props: {
@@ -21,12 +24,18 @@ export default {
   },
   data: function() {
     return {
-      // must somehow be replaced by service call to database in the future
-      trainingChoices: ["A", "B", "C"],
+      trainingChoices: [],
       selectedTraining: ""
     };
   },
+  mounted() {
+    this.loadTrainingTypes();
+  },
   methods: {
+    async loadTrainingTypes() {
+      const response = await AddTrainingService.getTrainingTypes();
+      this.trainingChoices = response.data;
+    },
     onChange(event) {
       this.selectedTraining = event.target.value;
       this.$emit("selected:training", this.selectedTraining);

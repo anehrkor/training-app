@@ -9,25 +9,28 @@
       <div class="form-group col-md-4">
         <InputFieldBase
           label="#"
-          v-model="input"
+          v-model="setNumber"
           inputMaxLength="2"
           inputSize="2"
+          @entered:baseValue="enterSetNumber"
         />
       </div>
       <div class="form-group col-md-4">
         <InputFieldBase
           label="Weight"
-          v-model="input"
+          v-model="weight"
           inputMaxLength="6"
           inputSize="6"
+          @entered:baseValue="enterWeight"
         />
       </div>
       <div class="form-group col-md-4">
         <InputFieldBase
           label="Reps"
-          v-model="input"
+          v-model="reps"
           inputMaxLength="3"
           inputSize="3"
+          @entered:baseValue="enterReps"
         />
       </div>
     </div>
@@ -43,7 +46,30 @@ export default {
     setLabel: { type: String, required: true, default: "" }
   },
   data: function() {
-    return { input: "" };
+    return {
+      setNumber: "",
+      weight: "",
+      reps: ""
+    };
+  },
+  methods: {
+    enterSetNumber(enteredSetNumber) {
+      this.setNumber = enteredSetNumber;
+    },
+    enterWeight(enteredWeight) {
+      this.weight = enteredWeight;
+    },
+    enterReps(enteredReps) {
+      this.reps = enteredReps;
+    },
+    // TODO: how can this be called from outside the component?
+    enterSet() {
+      this.$emit("entered:set", {
+        setNumber: this.setNumber,
+        weight: this.weight,
+        reps: this.reps
+      });
+    }
   }
 };
 </script>

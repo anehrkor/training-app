@@ -8,6 +8,7 @@
         :maxlength="inputMaxLength"
         :size="inputSize"
         v-model="input"
+        @change="baseValueEntered"
       />
     </p>
   </form>
@@ -26,6 +27,11 @@ export default {
     return {
       input: ""
     };
+  },
+  methods: {
+    baseValueEntered() {
+      this.$emit("entered:baseValue", this.input);
+    }
   }
 };
 </script>

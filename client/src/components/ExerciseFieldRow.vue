@@ -5,7 +5,7 @@
         <InputFieldExerciseChoice
           label="Exercise"
           selectDefault="Choose exercise"
-          v-model="selectedExercise"
+          @selected:exercise="selectExercise"
         />
       </div>
       <div v-for="(set, index) in sets" :key="index">
@@ -42,15 +42,28 @@ export default {
   name: "exercise-field-row",
   components: { InputFieldExerciseChoice, SetInputFields },
   data: function() {
-    return { selectedExercise: "", sets: [] };
+    return { exercise: "", sets: [] };
   },
   methods: {
     addSet: function() {
       var nSet = "Set " + (this.sets.length + 1).toString();
-      this.sets.push({ setNumber: nSet });
+      this.sets.push({ setNumber: nSet, weight: "", reps: "" });
     },
     removeSet: function(index) {
       this.sets.splice(index, 1);
+    },
+    selectExercise(selectedExercise) {
+      this.exercise = selectedExercise;
+    },
+    // TODO: how can this be called and when should it be?
+    addSetData(setData) {
+      const setIndex = this.sets.findIndex(el => el.id === setData.setNumber);
+      this.sets[setIndex] = {
+        setNumber: setData.setNumber,
+        weight: setData.weight,
+        reps: setData.reps
+      };
+      console.log(this.sets);
     }
   }
 };

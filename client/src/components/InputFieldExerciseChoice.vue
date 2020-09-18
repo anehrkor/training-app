@@ -31,6 +31,7 @@ export default {
   methods: {
     onChange(event) {
       this.selectedExercise = event.target.value;
+      this.$emit("selected:exercise", this.selectedExercise);
     }
   }
 };

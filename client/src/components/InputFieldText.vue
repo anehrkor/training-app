@@ -2,7 +2,12 @@
   <form>
     <label for="text-label">{{ label }}</label>
     <p>
-      <textarea :placeholder="placeholder" v-model="text" maxlength="140">
+      <textarea
+        :placeholder="placeholder"
+        v-model="text"
+        maxlength="140"
+        @change="textEntered"
+      >
       </textarea>
     </p>
   </form>
@@ -31,6 +36,9 @@ export default {
       if (/[^(a-zA-Z0-9):.!?'"&()/;öäüß-\s]/.test(event.key)) {
         event.preventDefault();
       }
+    },
+    textEntered() {
+      this.$emit("entered:text", this.text);
     }
   }
 };

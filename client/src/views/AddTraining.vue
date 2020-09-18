@@ -11,37 +11,37 @@
             <div class="form-group col-md-2">
               <InputFieldDate
                 label="Date"
-                v-model="date"
                 @keydown="dateKeydown($event)"
+                @entered:date="enterDate"
               />
             </div>
             <div class="form-group col-md-2">
               <InputFieldTime
                 label="Started at"
-                v-model="startTime"
                 @keydown="timeKeydown($event)"
+                @entered:time="enterStartTime"
               />
             </div>
             <div class="form-group col-md-2">
               <InputFieldTime
                 label="Finished at"
-                v-model="endTime"
                 @keydown="timeKeydown($event)"
+                @entered:time="enterEndTime"
               />
             </div>
             <div class="form-group col-md-2">
               <InputFieldTrainingChoice
                 label="Training type"
                 selectDefault="Choose type"
-                v-model="selectedTraining"
+                @selected:training="selectTraining"
               />
             </div>
             <div class="form-group col-md-4">
               <InputFieldText
                 label="Comment"
                 placeholder="Enter comment"
-                v-model="text"
                 @keydown="textKeydown($event)"
+                @entered:text="enterTrainingComment"
               />
             </div>
           </div>
@@ -100,7 +100,7 @@ export default {
       startTime: "",
       endTime: "",
       selectedTraining: "",
-      text: "",
+      trainingComment: "",
       exercises: []
     };
   },
@@ -112,15 +112,28 @@ export default {
     removeExercise: function(index) {
       this.exercises.splice(index, 1);
     },
+    enterDate(enteredDate) {
+      this.date = enteredDate;
+    },
+    enterStartTime(enteredTime) {
+      this.startTime = enteredTime;
+    },
+    enterEndTime(enteredTime) {
+      this.endTime = enteredTime;
+    },
+    selectTraining(selectedTraining) {
+      this.selectedTraining = selectedTraining;
+    },
+    enterTrainingComment(enteredTrainingComment) {
+      this.trainingComment = enteredTrainingComment;
+    },
     async addTrainig() {
       const response = await AddTrainingService.addTraining({
-        // TODO: figure out why this.date is always empty
-        /*date: this.date,
+        date: this.date,
         startTime: this.startTime,
-        endTime: this.endTime*/
-        date: "13.09.2020",
-        startTime: "07:00",
-        endTime: "06:00"
+        endTime: this.endTime,
+        selectedTraining: this.selectedTraining,
+        trainingComment: this.trainingComment
       });
       console.log(response.data);
     }

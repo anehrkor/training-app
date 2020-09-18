@@ -7,6 +7,7 @@
         :placeholder="placeholder"
         v-model="date"
         maxlength="10"
+        @change="dateEntered"
       />
     </p>
   </form>
@@ -35,6 +36,9 @@ export default {
       if (/[^(0-9).]/.test(event.key)) {
         event.preventDefault();
       }
+    },
+    dateEntered() {
+      this.$emit("entered:date", this.date);
     }
   }
 };

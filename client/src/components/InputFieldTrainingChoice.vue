@@ -29,6 +29,7 @@ export default {
   methods: {
     onChange(event) {
       this.selectedTraining = event.target.value;
+      this.$emit("selected:training", this.selectedTraining);
     }
   }
 };

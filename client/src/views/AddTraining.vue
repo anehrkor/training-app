@@ -99,7 +99,7 @@ export default {
       date: "",
       startTime: "",
       endTime: "",
-      selectedTraining: "",
+      training: "",
       trainingComment: "",
       exercises: []
     };
@@ -122,7 +122,7 @@ export default {
       this.endTime = enteredTime;
     },
     selectTraining(selectedTraining) {
-      this.selectedTraining = selectedTraining;
+      this.training = selectedTraining;
     },
     enterTrainingComment(enteredTrainingComment) {
       this.trainingComment = enteredTrainingComment;
@@ -132,7 +132,7 @@ export default {
         date: this.date,
         startTime: this.startTime,
         endTime: this.endTime,
-        selectedTraining: this.selectedTraining,
+        training: this.training,
         trainingComment: this.trainingComment
       });
       console.log(response.data);

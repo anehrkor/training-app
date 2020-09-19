@@ -6,6 +6,7 @@
         :placeholder="placeholder"
         v-model="text"
         maxlength="140"
+        @keydown="textKeydown($event)"
         @change="textEntered"
       >
       </textarea>
@@ -33,7 +34,7 @@ export default {
   methods: {
     // taken from https://stackoverflow.com/questions/50566430/vue-js-how-to-restrict-special-characters-in-an-input-field
     textKeydown(event) {
-      if (/[^(a-zA-Z0-9):.!?'"&()/;öäüß-\s]/.test(event.key)) {
+      if (/[^(a-zA-Z0-9):.!?'"&()/;öäüß-\s]^\b/.test(event.key)) {
         event.preventDefault();
       }
     },

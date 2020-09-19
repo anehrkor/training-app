@@ -9,23 +9,17 @@
         <div class="jumbotron bg-light border col-md-10 offset-md-1 shadow-sm">
           <div class="row">
             <div class="form-group col-md-2">
-              <InputFieldDate
-                label="Date"
-                @keydown="dateKeydown($event)"
-                @entered:date="enterDate"
-              />
+              <InputFieldDate label="Date" @entered:date="enterDate" />
             </div>
             <div class="form-group col-md-2">
               <InputFieldTime
                 label="Started at"
-                @keydown="timeKeydown($event)"
                 @entered:time="enterStartTime"
               />
             </div>
             <div class="form-group col-md-2">
               <InputFieldTime
                 label="Finished at"
-                @keydown="timeKeydown($event)"
                 @entered:time="enterEndTime"
               />
             </div>
@@ -40,7 +34,6 @@
               <InputFieldText
                 label="Comment"
                 placeholder="Enter comment"
-                @keydown="textKeydown($event)"
                 @entered:text="enterTrainingComment"
               />
             </div>

@@ -7,6 +7,7 @@
         :placeholder="placeholder"
         v-model="date"
         maxlength="10"
+        @keydown="dateKeydown($event)"
         @change="dateEntered"
       />
     </p>
@@ -33,7 +34,7 @@ export default {
   methods: {
     // taken from https://stackoverflow.com/questions/50566430/vue-js-how-to-restrict-special-characters-in-an-input-field
     dateKeydown(event) {
-      if (/[^(0-9).]/.test(event.key)) {
+      if (/[^(0-9).]^\b/.test(event.key)) {
         event.preventDefault();
       }
     },

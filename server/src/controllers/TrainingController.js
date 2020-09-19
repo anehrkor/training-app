@@ -1,9 +1,28 @@
 const { TrainingTypes } = require("../models");
 
 module.exports = {
-  getTrainingTypes(req, res) {
-    // TODO: add connection to data base
-    res.send(["Push day", "Pull day", "Leg day"]);
+  async getTrainingTypes(req, res) {
+    var trainingTypesResponse = [];
+    try {
+      const trainingTypes = await TrainingTypes.findAll();
+      if (trainingTypes != null) {
+        for (
+          var trainingTypeIndex = 0;
+          trainingTypeIndex < trainingTypes.length;
+          trainingTypeIndex++
+        ) {
+          trainingTypesResponse.push(
+            trainingTypes[trainingTypeIndex].dataValues.trainingType
+          );
+        }
+        trainingTypesResponse.sort();
+      }
+      res.send(trainingTypesResponse);
+    } catch (error) {
+      res.status(500).send({
+        error: "Training types could not be retrieved."
+      });
+    }
   },
   async addTrainingType(req, res) {
     /*
@@ -13,7 +32,7 @@ module.exports = {
     try {
       const trainingType = await TrainingTypes.create(req.body);
       res.send(trainingType);
-    } catch (err) {
+    } catch (error) {
       res.status(400).send({
         error: "This training type already exists."
       });

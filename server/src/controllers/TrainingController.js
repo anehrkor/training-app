@@ -1,17 +1,26 @@
+const { TrainingTypes } = require("../models");
+
 module.exports = {
   getTrainingTypes(req, res) {
     // TODO: add connection to data base
     res.send(["Push day", "Pull day", "Leg day"]);
   },
-  addTrainingType(req, res) {
+  async addTrainingType(req, res) {
     /*
     - add field requirement
-    - add field validation
     - send complete response to data base
     */
-    res.send({
-      message: `Added training type ${req.body.trainingType}.`,
-    });
+    try {
+      const trainingType = await TrainingTypes.create(req.body);
+      res.send(trainingType);
+    } catch (err) {
+      res.status(400).send({
+        error: "This training type already exists."
+      });
+      res.status(500).send({
+        error: "A technical error occurred."
+      });
+    }
   },
   addTraining(req, res) {
     /* TODO:

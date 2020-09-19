@@ -12,7 +12,6 @@ module.exports = {
   addExerciseType(req, res) {
     /*
     - add field requirement
-    - add field validation
     - send complete response to data base
     */
     res.send({

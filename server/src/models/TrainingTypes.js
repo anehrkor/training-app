@@ -1,8 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define("TrainingTypes", {
+  const TrainingTypes = sequelize.define("TrainingTypes", {
     trainingType: {
       type: DataTypes.STRING,
       unique: true
     }
   });
+
+  /* Is this even needed?
+  TrainingTypes.associate = models => {
+    TrainingTypes.hasMany(models.ExerciseTypes, { onDelete: "CASCADE" });
+  }
+  */
+
+  return TrainingTypes;
 };

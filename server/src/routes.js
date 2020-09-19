@@ -8,9 +8,9 @@ module.exports = (app) => {
 
   app.post("/addTrainingType", TrainingControllerPolicy.addTrainingType, TrainingController.addTrainingType);
 
-  app.get("/getExerciseTypes", ExerciseControllerPolicy.addExerciseType, ExerciseController.getExerciseTypes);
+  app.get("/getExerciseTypes", ExerciseController.getExerciseTypes);
 
-  app.post("/addExerciseType", ExerciseController.addExerciseType);
+  app.post("/addExerciseType", ExerciseControllerPolicy.addExerciseType, ExerciseController.addExerciseType);
 
   app.post("/addTraining", TrainingController.addTraining);
 }

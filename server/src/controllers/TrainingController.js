@@ -20,7 +20,8 @@ module.exports = {
       res.send(trainingTypesResponse);
     } catch (error) {
       res.status(500).send({
-        error: "Training types could not be retrieved."
+        error: "Training types could not be retrieved.",
+        trainingTypesResponse
       });
     }
   },

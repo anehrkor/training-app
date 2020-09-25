@@ -15,6 +15,8 @@
 <script>
 // import services
 import AddTrainingService from "@/services/AddTrainingService.js";
+// import converter
+import MapTrainingTypeToString from "@/tools/TrainingTypeConverter.js";
 
 export default {
   name: "input-field-training-choice",
@@ -34,7 +36,10 @@ export default {
   methods: {
     async loadTrainingTypes() {
       const response = await AddTrainingService.getTrainingTypes();
-      this.trainingChoices = response.data;
+      const responseTranslation = MapTrainingTypeToString.mapTrainingTypeToString(
+        response.data
+      );
+      this.trainingChoices = responseTranslation;
     },
     onChange(event) {
       this.selectedTraining = event.target.value;

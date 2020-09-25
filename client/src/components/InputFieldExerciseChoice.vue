@@ -17,6 +17,8 @@
 <script>
 // import services
 import AddTrainingService from "@/services/AddTrainingService.js";
+// import converter
+import MapExerciseTypeToString from "@/tools/ExerciseTypeConverter.js";
 
 export default {
   name: "input-field-exercise-choice",
@@ -30,13 +32,16 @@ export default {
       selectedExercise: ""
     };
   },
-  mounted() {
+  created() {
     this.loadExercises();
   },
   methods: {
     async loadExercises() {
       const response = await AddTrainingService.getExerciseTypes();
-      this.exerciseChoices = response.data;
+      const responseTranslation = MapExerciseTypeToString.mapExerciseTypeToString(
+        response.data
+      );
+      this.exerciseChoices = responseTranslation;
     },
     onChange(event) {
       this.selectedExercise = event.target.value;

@@ -1,6 +1,6 @@
 const { ExerciseTypes, TrainingTypes } = require("../models");
 
-module.exports = {    
+module.exports = {
   async getExerciseTypes(req, res) {
     /* TODO:
     - response must depend on training type
@@ -8,7 +8,6 @@ module.exports = {
     var exerciseTypesResponse = [];
     try {
       const exerciseTypes = await ExerciseTypes.findAll();
-      console.log(exerciseTypes);
       if (exerciseTypes != null) {
         for (
           var exerciseTypeIndex = 0;
@@ -16,7 +15,7 @@ module.exports = {
           exerciseTypeIndex++
         ) {
           exerciseTypesResponse.push(
-            ExerciseTypes[exerciseTypeIndex].dataValues.exerciseType
+            exerciseTypes[exerciseTypeIndex].dataValues.exerciseType
           );
         }
       }
@@ -43,7 +42,8 @@ module.exports = {
       if (providedTrainingType != null) {
         // create exercise type for training type already existing within the data base
         try {
-          const exerciseType = await ExerciseTypes.create(req.body); // TODO: find out why this is not working
+          var input = { "exerciseType": req.body.exerciseType, "trainingTypeForExercise": req.body.trainingType };
+          const exerciseType = await ExerciseTypes.create(input); // TODO: find out why this is not working
           res.send({ exerciseType, providedTrainingType });
         } catch (error) {
           res.status(500).send({

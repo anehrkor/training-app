@@ -8,7 +8,7 @@ module.exports = {
       dialect: process.env.DIALECT || "postgres",
       host: process.env.HOST || "localhost",
       port: "5432",
-      storage: "./trainingtypes.postgres",
+      storage: "./trainingapp.postgres",
     },
   },
 };

@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => { // TODO: implement relation to trai
     trainingType: {
       type: DataTypes.STRING,
       unique: true,
-    },
+    }
   });
 
   /* Is this even needed?

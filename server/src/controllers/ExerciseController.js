@@ -19,7 +19,14 @@ module.exports = {
           );
         }
       }
-      res.send(exerciseTypesResponse);
+      if (exerciseTypesResponse.length > 0) {
+        res.send(exerciseTypesResponse);
+      } else {
+        res.status(400).send({
+          error: "There are no exercise types available.",
+          exerciseTypesResponse
+        });
+      }
     } catch (error) {
       res.status(500).send({
         error: "Exercise types could not be retrieved.",
@@ -42,8 +49,8 @@ module.exports = {
       if (providedTrainingType != null) {
         // create exercise type for training type already existing within the data base
         try {
-          var input = { "exerciseType": req.body.exerciseType, "trainingTypeForExercise": req.body.trainingType };
-          const exerciseType = await ExerciseTypes.create(input); // TODO: find out why this is not working
+          var input = { "exerciseType": req.body.exerciseType, "trainingType": req.body.trainingType };
+          const exerciseType = await ExerciseTypes.create(input); // TODO: find out why trainingTypeId is always set to NULL
           res.send({ exerciseType, providedTrainingType });
         } catch (error) {
           res.status(500).send({

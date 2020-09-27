@@ -17,7 +17,14 @@ module.exports = {
         }
         trainingTypesResponse.sort();
       }
-      res.send(trainingTypesResponse);
+      if (trainingTypesResponse.length > 0) {
+        res.send(trainingTypesResponse);
+      } else {
+        res.status(400).send({
+          error: "There are no training types available.",
+          trainingTypesResponse
+        });
+      }
     } catch (error) {
       res.status(500).send({
         error: "Training types could not be retrieved.",

@@ -2,8 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
 const config = require("../config/config");
-//const TrainingTypes = require("./TrainingTypes");
-//const ExerciseTypes = require("./ExerciseTypes");
 const db = {};
 
 const sequelize = new Sequelize(
@@ -21,18 +19,11 @@ fs
     db[model.name] = model
   });
 
-/* Is this even needed?
-const models = {
-  TrainingTypes,
-  ExerciseTypes
-};
-
-Object.keys(models).forEach(key => {
-  if ("associate" in models[key]) {
-    models[key].associate(models);
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
   }
 });
-*/
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

@@ -6,11 +6,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  /* Is this even needed?
-  TrainingTypes.associate = models => {
-    TrainingTypes.hasMany(models.ExerciseTypes, { onDelete: "CASCADE" });
+  TrainingTypes.associate = function(models) {
+    TrainingTypes.hasMany(models.ExerciseTypes, {
+      //foreignKey: "",
+      //as: "",
+      onDelete: "CASCADE"
+    });
   }
-  */
 
   return TrainingTypes;
 };

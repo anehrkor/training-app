@@ -10,11 +10,13 @@ module.exports = (sequelize, DataTypes) => { // TODO: implement relation to trai
     }
   });
 
-  /* Is this even needed?
-  ExerciseTypes.associate = models => {
-    ExerciseTypes.belongsTo(models.TrainingTypes);
+  ExerciseTypes.associate = function(models) {
+    ExerciseTypes.belongsTo(models.TrainingTypes, {
+      //foreignKey: "",
+      //as: "",
+      onDelete: "CASCADE"
+    })
   }
-  */
 
   return ExerciseTypes;
 };

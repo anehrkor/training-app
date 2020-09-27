@@ -7,11 +7,11 @@ export default {
   addTrainingType: function(trainingType) {
     return Api().post("addTrainingType", trainingType);
   },
-  getExerciseTypes: function() {
-    return Api().get("getExerciseTypes");
+  getExerciseTypes: function(trainingType) {
+    return Api().get("getExerciseTypes", trainingType);
   },
-  addExerciseType: function(exerciseType) {
-    return Api().post("addExerciseType", exerciseType);
+  addExerciseType: function(exerciseType, trainingType) {
+    return Api().post("addExerciseType", { exerciseType, trainingType });
   },
   addTraining: function(training) {
     return Api().post("addTraining", training);

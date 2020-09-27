@@ -37,6 +37,7 @@ export default {
   },
   methods: {
     async loadExercises() {
+      // TODO: check if training type has been selected already and then provide it as argument to GET method
       const response = await AddTrainingService.getExerciseTypes();
       const responseTranslation = MapExerciseTypeToString.mapExerciseTypeToString(
         response.data

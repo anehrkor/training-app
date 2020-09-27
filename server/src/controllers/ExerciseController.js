@@ -2,12 +2,17 @@ const { ExerciseTypes, TrainingTypes } = require("../models");
 
 module.exports = {
   async getExerciseTypes(req, res) {
-    /* TODO:
-    - response must depend on training type
-    */
+    
     var exerciseTypesResponse = [];
+    const providedTrainingType = req.body.trainingType != null ? req.body.trainingType : "NO_TRAINING_TYPE_PROVIDED";
+
     try {
-      const exerciseTypes = await ExerciseTypes.findAll();
+      // Check if a training type was provided in the request body and default to findAll otherwise
+      const exerciseTypes = providedTrainingType != "NO_TRAINING_TYPE_PROVIDED" ? await ExerciseTypes.findAll({
+        where: {
+          trainingType: providedTrainingType,
+        }
+      }) : await ExerciseTypes.findAll();
       if (exerciseTypes != null) {
         for (
           var exerciseTypeIndex = 0;
@@ -44,7 +49,7 @@ module.exports = {
       const providedTrainingType = await TrainingTypes.findOne({
         where: {
           trainingType: req.body.trainingType,
-        },
+        }
       });
       if (providedTrainingType != null) {
         // create exercise type for training type already existing within the data base

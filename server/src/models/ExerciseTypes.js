@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => { // TODO: implement relation to training type
+module.exports = (sequelize, DataTypes) => {
   const ExerciseTypes = sequelize.define("ExerciseTypes", {
     exerciseType: {
       type: DataTypes.STRING,

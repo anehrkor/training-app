@@ -63,34 +63,36 @@ module.exports = {
             startTime: req.body.startTime,
             endTime: req.body.endTime,
             trainingType: req.body.trainingType,
-            // TODO: send at least an empty string
-            comment: req.body.comment,
+            // Send an empty string in case no comment was provided in the request body
+            comment: req.body.comment != null ? req.body.comment : ""
           });
           var exercisesArray = [];
+          var setsArray = [];
           for (var exerciseIndex = 0; exerciseIndex < req.body.exercises.length; exerciseIndex++) {
             const exerciseId = trainingId + "_" + req.body.exercises[exerciseIndex].ordering;
             const exercise = await Exercise.create({
               exerciseId: exerciseId,
               exerciseType: req.body.exercises[exerciseIndex].exerciseType,
               ordering: req.body.exercises[exerciseIndex].ordering,
-              // TODO: send at least an empty string
-              comment: req.body.exercises[exerciseIndex].comment,
+              // Send an empty string in case no comment was provided in the request body
+              comment: req.body.exercises[exerciseIndex].comment != null ? req.body.exercises[exerciseIndex].comment : "",
               TrainingTrainingId: trainingId
             });
             exercisesArray.push(exercise);
-            var setsArray = [];
+            var setsInExercise = [];
             for (var setIndex = 0; setIndex < req.body.exercises[exerciseIndex].sets.length; setIndex++) {
               const setId = exerciseId + "_" + req.body.exercises[exerciseIndex].sets[setIndex].ordering;
               const set = await Set.create({
                 setId: setId,
                 ordering: req.body.exercises[exerciseIndex].sets[setIndex].ordering,
-                // TODO: ensure weight is converted into a decimal in case the user enters a "."
+                // Weight is automatically converted into decimal
                 weight: req.body.exercises[exerciseIndex].sets[setIndex].weight,
                 reps: req.body.exercises[exerciseIndex].sets[setIndex].reps,
                 ExerciseExerciseId: exerciseId
               });
-              setsArray.push(set);
+              setsInExercise.push(set);
             }
+            setsArray.push(setsInExercise);
           }
           res.send({ training, exercisesArray, setsArray });
         } catch (error) {

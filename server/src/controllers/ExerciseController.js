@@ -40,10 +40,6 @@ module.exports = {
     }
   },
   async addExerciseType(req, res) {
-    /*
-    - add field requirement
-    - send complete response to data base
-    */
     // check if trainingType exists
     try {
       const providedTrainingType = await TrainingTypes.findOne({

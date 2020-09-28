@@ -33,10 +33,6 @@ module.exports = {
     }
   },
   async addTrainingType(req, res) {
-    /*
-    - add field requirement
-    - send complete response to data base
-    */
     try {
       const trainingType = await TrainingTypes.create(req.body);
       res.send(trainingType);
@@ -50,9 +46,6 @@ module.exports = {
     }
   },
   async addTraining(req, res) {
-    /* TODO:
-    - add field requirements
-    */
     try {
       const providedTrainingType = await TrainingTypes.findOne({
         where: {
@@ -70,7 +63,8 @@ module.exports = {
             startTime: req.body.startTime,
             endTime: req.body.endTime,
             trainingType: req.body.trainingType,
-            comment: req.body.comment
+            // TODO: send at least an empty string
+            comment: req.body.comment,
           });
           var exercisesArray = [];
           for (var exerciseIndex = 0; exerciseIndex < req.body.exercises.length; exerciseIndex++) {
@@ -79,6 +73,7 @@ module.exports = {
               exerciseId: exerciseId,
               exerciseType: req.body.exercises[exerciseIndex].exerciseType,
               ordering: req.body.exercises[exerciseIndex].ordering,
+              // TODO: send at least an empty string
               comment: req.body.exercises[exerciseIndex].comment,
               TrainingTrainingId: trainingId
             });

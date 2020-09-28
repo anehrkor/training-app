@@ -10,7 +10,7 @@ module.exports = {
       // Check if a training type was provided in the request body and default to findAll otherwise
       const exerciseTypes = providedTrainingType != "NO_TRAINING_TYPE_PROVIDED" ? await ExerciseTypes.findAll({
         where: {
-          trainingType: providedTrainingType,
+          TrainingTypeTrainingType: providedTrainingType,
         }
       }) : await ExerciseTypes.findAll();
       if (exerciseTypes != null) {

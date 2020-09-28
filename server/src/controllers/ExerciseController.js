@@ -54,8 +54,10 @@ module.exports = {
       if (providedTrainingType != null) {
         // create exercise type for training type already existing within the data base
         try {
-          var input = { "exerciseType": req.body.exerciseType, "trainingType": req.body.trainingType };
-          const exerciseType = await ExerciseTypes.create(input); // TODO: find out why trainingTypeId is always set to NULL
+          const exerciseType = await ExerciseTypes.create({
+            exerciseType: req.body.exerciseType,
+            TrainingTypeTrainingType: req.body.trainingType
+          });
           res.send({ exerciseType, providedTrainingType });
         } catch (error) {
           res.status(500).send({

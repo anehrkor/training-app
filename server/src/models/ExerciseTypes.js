@@ -3,19 +3,14 @@ module.exports = (sequelize, DataTypes) => {
     exerciseType: {
       type: DataTypes.STRING,
       unique: true,
-    },
-    trainingType: {
-      type: DataTypes.STRING,
-      unique: true,
+      primaryKey: true
     }
   });
 
   ExerciseTypes.associate = function(models) {
     ExerciseTypes.belongsTo(models.TrainingTypes, {
-      //foreignKey: "",
-      //as: "",
       onDelete: "CASCADE"
-    })
+    });
   }
 
   return ExerciseTypes;

@@ -1,29 +1,26 @@
 module.exports = (sequelize, DataTypes) => {
   const Exercise = sequelize.define("Exercise", {
-    ordering: {
-      type: DataTypes.INTEGER,
+    exerciseId: {
+      type: DataTypes.STRING,
       unique: true,
+      primaryKey: true
+    },
+    exerciseType: {
+      type: DataTypes.STRING
+    },
+    ordering: {
+      type: DataTypes.INTEGER
     },
     comment: {
-      type: DataTypes.STRING,
-      unique: true
+      type: DataTypes.STRING
     }
   });
 
   Exercise.associate = function (models) {
-    Exercise.hasOne(models.ExerciseTypes, {
-      //foreignKey: "",
-      //as: "",
-      onDelete: "CASCADE"
-    });
     Exercise.hasMany(models.Set, {
-      //foreignKey: "",
-      //as: "",
       onDelete: "CASCADE"
     });
     Exercise.belongsTo(models.Training, {
-      //foreignKey: "",
-      //as: "",
       onDelete: "CASCADE"
     });
   };

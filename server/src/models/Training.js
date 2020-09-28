@@ -1,32 +1,29 @@
 module.exports = (sequelize, DataTypes) => {
   const Training = sequelize.define("Training", {
-    date: {
+    trainingId: {
       type: DataTypes.STRING,
       unique: true,
+      primaryKey: true
+    },
+    date: {
+      type: DataTypes.STRING
     },
     startTime: {
-      type: DataTypes.STRING,
-      unique: true
+      type: DataTypes.STRING
     },
     endTime: {
-      type: DataTypes.STRING,
-      unique: true
+      type: DataTypes.STRING
+    },
+    trainingType: {
+      type: DataTypes.STRING
     },
     comment: {
-      type: DataTypes.STRING,
-      unique: true,
+      type: DataTypes.STRING
     }
   });
 
   Training.associate = function (models) {
-    Training.hasOne(models.TrainingTypes, {
-      //foreignKey: "",
-      //as: "",
-      onDelete: "CASCADE",
-    });
     Training.hasMany(models.Exercise, {
-      //foreignKey: "",
-      //as: "",
       onDelete: "CASCADE",
     });
   };

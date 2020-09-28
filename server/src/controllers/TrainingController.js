@@ -1,4 +1,4 @@
-const { TrainingTypes } = require("../models");
+const { TrainingTypes, Training, Exercise, Set } = require("../models");
 
 module.exports = {
   async getTrainingTypes(req, res) {
@@ -49,19 +49,64 @@ module.exports = {
       });
     }
   },
-  addTraining(req, res) {
+  async addTraining(req, res) {
     /* TODO:
     - add field requirements
     - add field validations
-    - send complete response to data base
     */
-    if (req.body.excercises != null) {
-      for (var i = 0; i < req.body.excercises.length; i++) {
-        console.log(req.body.excercises[i].excerciseType);
+    try {
+      const providedTrainingType = await TrainingTypes.findOne({
+        where: {
+          trainingType: req.body.trainingType
+        }
+      });
+      if (providedTrainingType != null) {
+        try {
+          const trainingId =
+            req.body.date + "_" + req.body.startTime + "_" + req.body.endTime;
+          const training = await Training.create({
+            trainingId: trainingId,
+            date: req.body.date,
+            startTime: req.body.startTime,
+            endTime: req.body.endTime,
+            trainingType: req.body.trainingType,
+            comment: req.body.comment
+          });
+          var exercisesArray = [];
+          for (var exerciseIndex = 0; exerciseIndex < req.body.exercises.length; exerciseIndex++) {
+            const exerciseId = trainingId + "_" + req.body.exercises[exerciseIndex].ordering;
+            const exercise = await Exercise.create({
+              exerciseId: exerciseId,
+              exerciseType: req.body.exercises[exerciseIndex].exerciseType,
+              ordering: req.body.exercises[exerciseIndex].ordering,
+              comment: req.body.exercises[exerciseIndex].comment,
+              TrainingTrainingId: trainingId
+            });
+            exercisesArray.push(exercise);
+            var setsArray = [];
+            for (var setIndex = 0; setIndex < req.body.exercises[exerciseIndex].sets.length; setIndex++) {
+              const setId = exerciseId + "_" + req.body.exercises[exerciseIndex].sets[setIndex].ordering;
+              const set = await Set.create({
+                setId: setId,
+                ordering: req.body.exercises[exerciseIndex].sets[setIndex].ordering,
+                weight: req.body.exercises[exerciseIndex].sets[setIndex].weight,
+                reps: req.body.exercises[exerciseIndex].sets[setIndex].reps,
+                ExerciseExerciseId: exerciseId
+              });
+              setsArray.push(set);
+            }
+          }
+          res.send({ training, exercisesArray, setsArray });
+        } catch (error) {
+          res.status(500).send({
+            error: "A technical error occurred.",
+          });
+        }
       }
+    } catch (error) {
+      res.status(500).send({
+        error: "A technical error occurred."
+      });
     }
-    res.send({
-      message: `Your ${req.body.training} training on ${req.body.date} from ${req.body.startTime} to ${req.body.endTime} was saved.`,
-    });
   }
 };

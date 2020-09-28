@@ -56,7 +56,6 @@ module.exports = {
     const { error } = schema.validate(req.body);
 
     if (error) {
-      console.log(error);
       switch (error.details[0].context.key) {
         case "date":
           if (error.details[0].message.includes("is required")) {

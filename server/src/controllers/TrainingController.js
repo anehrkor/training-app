@@ -102,6 +102,12 @@ module.exports = {
             error: "A technical error occurred.",
           });
         }
+      } else {
+        const nonMatchingTrainingType = req.body.trainingType;
+        res.status(400).send({
+          error: "The provided training type does not exist.",
+          nonMatchingTrainingType
+        });
       }
     } catch (error) {
       res.status(500).send({

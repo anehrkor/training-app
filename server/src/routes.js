@@ -12,5 +12,5 @@ module.exports = (app) => {
 
   app.post("/addExerciseType", ExerciseControllerPolicy.addExerciseType, ExerciseController.addExerciseType);
 
-  app.post("/addTraining", TrainingController.addTraining);
+  app.post("/addTraining", TrainingControllerPolicy.addTraining, TrainingController.addTraining);
 }

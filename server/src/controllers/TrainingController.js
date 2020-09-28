@@ -52,7 +52,6 @@ module.exports = {
   async addTraining(req, res) {
     /* TODO:
     - add field requirements
-    - add field validations
     */
     try {
       const providedTrainingType = await TrainingTypes.findOne({
@@ -66,6 +65,7 @@ module.exports = {
             req.body.date + "_" + req.body.startTime + "_" + req.body.endTime;
           const training = await Training.create({
             trainingId: trainingId,
+            // TODO: convert dates and times into ISO-compatible dates/times
             date: req.body.date,
             startTime: req.body.startTime,
             endTime: req.body.endTime,
@@ -89,6 +89,7 @@ module.exports = {
               const set = await Set.create({
                 setId: setId,
                 ordering: req.body.exercises[exerciseIndex].sets[setIndex].ordering,
+                // TODO: ensure weight is converted into a decimal in case the user enters a "."
                 weight: req.body.exercises[exerciseIndex].sets[setIndex].weight,
                 reps: req.body.exercises[exerciseIndex].sets[setIndex].reps,
                 ExerciseExerciseId: exerciseId

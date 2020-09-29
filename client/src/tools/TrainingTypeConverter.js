@@ -20,5 +20,9 @@ export default {
       }
     }
     return output;
+  },
+  mapStringToTrainingType: function(input) {
+    const output = input.toUpperCase().replace(/ /g, "_");
+    return output;
   }
 };

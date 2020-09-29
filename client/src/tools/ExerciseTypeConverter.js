@@ -57,5 +57,9 @@ export default {
       }
     }
     return output;
+  },
+  mapStringToExerciseType: function(input) {
+    const output = input.toUpperCase().replace(/ /g, "_");
+    return output;
   }
 };

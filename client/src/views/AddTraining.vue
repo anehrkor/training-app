@@ -66,6 +66,57 @@
     <button type="submit" class="btn btn-primary" @click="addTrainig">
       Add training
     </button>
+    <br />
+    <h3 style="text-align:left; padding:10px; margin:auto; width:75%">
+      Add a new training or exercise type
+    </h3>
+    <div class="container">
+      <div class="mt-1">
+        <div class="jumbotron bg-light border col-md-10 offset-md-1 shadow-sm">
+          <div class="row">
+            <div class="form-group col-md-8">
+              <InputFieldType
+                placeholder="Enter training type"
+                @entered:type="enterNewTrainingType"
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <button
+                class="btn btn-secondary btn-sm float-right"
+                title="Click to add new training type"
+                @click="addTrainingType"
+              >
+                &nbsp;Add training type
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-4">
+              <InputFieldType
+                placeholder="Enter exercise type"
+                @entered:type="enterNewExerciseType"
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <InputFieldTrainingChoice
+                label="Training type"
+                selectDefault="Choose type"
+                @selected:training="selectNewExerciseTrainingType"
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <button
+                class="btn btn-secondary btn-sm float-right"
+                title="Click to add new exercise type"
+                @click="addExerciseType"
+              >
+                &nbsp;Add exercise type
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -76,8 +127,12 @@ import InputFieldTime from "@/components/InputFieldTime.vue";
 import InputFieldTrainingChoice from "@/components/InputFieldTrainingChoice.vue";
 import InputFieldText from "@/components/InputFieldText.vue";
 import ExerciseFieldRow from "@/components/ExerciseFieldRow.vue";
+import InputFieldType from "@/components/InputFieldType.vue";
 // import services
 import AddTrainingService from "@/services/AddTrainingService.js";
+// import converter
+import MapTrainingTypeToString from "@/tools/TrainingTypeConverter.js";
+import MapExerciseTypeToString from "@/tools/ExerciseTypeConverter.js";
 
 export default {
   components: {
@@ -85,7 +140,8 @@ export default {
     InputFieldTime,
     InputFieldTrainingChoice,
     InputFieldText,
-    ExerciseFieldRow
+    ExerciseFieldRow,
+    InputFieldType
   },
   data: function() {
     return {
@@ -94,7 +150,10 @@ export default {
       endTime: "",
       training: "",
       trainingComment: "",
-      exercises: []
+      exercises: [],
+      newTrainingType: "",
+      newExerciseType: "",
+      newExerciseTypeTrainingType: ""
     };
   },
   methods: {
@@ -120,6 +179,15 @@ export default {
     enterTrainingComment(enteredTrainingComment) {
       this.trainingComment = enteredTrainingComment;
     },
+    enterNewTrainingType(enteredTrainingType) {
+      this.newTrainingType = enteredTrainingType;
+    },
+    enterNewExerciseType(enteredExerciseType) {
+      this.newExerciseType = enteredExerciseType;
+    },
+    selectNewExerciseTrainingType(selectedTraining) {
+      this.newExerciseTypeTrainingType = selectedTraining;
+    },
     async addTrainig() {
       const response = await AddTrainingService.addTraining({
         date: this.date,
@@ -128,6 +196,25 @@ export default {
         training: this.training,
         trainingComment: this.trainingComment
       });
+      console.log(response.data);
+    },
+    async addTrainingType() {
+      const translatedNewTrainingType = MapTrainingTypeToString.mapStringToTrainingType(
+        this.newTrainingType
+      );
+      const response = await AddTrainingService.addTrainingType({
+        trainingType: translatedNewTrainingType
+      });
+      console.log(response.data);
+    },
+    async addExerciseType() {
+      const translatedNewExerciseType = MapExerciseTypeToString.mapStringToExerciseType(
+        this.newExerciseType
+      );
+      const response = await AddTrainingService.addExerciseType(
+        translatedNewExerciseType,
+        this.newExerciseTypeTrainingType
+      );
       console.log(response.data);
     }
   }

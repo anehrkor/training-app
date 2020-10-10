@@ -35,11 +35,15 @@ export default {
   },
   methods: {
     async loadTrainingTypes() {
-      const response = await AddTrainingService.getTrainingTypes();
-      const responseTranslation = MapTrainingTypeToString.mapTrainingTypeToString(
-        response.data
-      );
-      this.trainingChoices = responseTranslation;
+      try {
+        const response = await AddTrainingService.getTrainingTypes();
+        const responseTranslation = MapTrainingTypeToString.mapTrainingTypeToString(
+          response.data
+        );
+        this.trainingChoices = responseTranslation;
+      } catch (error) {
+        console.log(error, "\nCould not load training types from database.");
+      }
     },
     onChange(event) {
       this.selectedTraining = event.target.value;

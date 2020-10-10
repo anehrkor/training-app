@@ -36,13 +36,19 @@ export default {
     this.loadExercises();
   },
   methods: {
-    async loadExercises() {
-      // TODO: check if training type has been selected already and then provide it as argument to GET method
-      const response = await AddTrainingService.getExerciseTypes();
-      const responseTranslation = MapExerciseTypeToString.mapExerciseTypeToString(
-        response.data
-      );
-      this.exerciseChoices = responseTranslation;
+    async loadExercises(trainingType) {
+      try {
+        const response =
+          trainingType != null
+            ? await AddTrainingService.getExerciseTypes(trainingType)
+            : await AddTrainingService.getExerciseTypes();
+        const responseTranslation = MapExerciseTypeToString.mapExerciseTypeToString(
+          response.data
+        );
+        this.exerciseChoices = responseTranslation;
+      } catch (error) {
+        console.log(error, "\nCould not load exercise types from database.");
+      }
     },
     onChange(event) {
       this.selectedExercise = event.target.value;

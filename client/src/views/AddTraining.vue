@@ -189,33 +189,53 @@ export default {
       this.newExerciseTypeTrainingType = selectedTraining;
     },
     async addTrainig() {
-      const response = await AddTrainingService.addTraining({
-        date: this.date,
-        startTime: this.startTime,
-        endTime: this.endTime,
-        training: this.training,
-        trainingComment: this.trainingComment
-      });
-      console.log(response.data);
+      try {
+        const response = await AddTrainingService.addTraining({
+          date: this.date,
+          startTime: this.startTime,
+          endTime: this.endTime,
+          training: this.training,
+          trainingComment: this.trainingComment
+        });
+        console.log(response.data);
+      } catch (error) {
+        console.log(error, "\nCould not add training to database.");
+      }
     },
+    // TODO: training type selector must be updated after successfull addition of new training type
     async addTrainingType() {
       const translatedNewTrainingType = MapTrainingTypeToString.mapStringToTrainingType(
         this.newTrainingType
       );
-      const response = await AddTrainingService.addTrainingType({
-        trainingType: translatedNewTrainingType
-      });
-      console.log(response.data);
+      try {
+        const response = await AddTrainingService.addTrainingType({
+          trainingType: translatedNewTrainingType
+        });
+        console.log(response.data);
+      } catch (error) {
+        console.log(
+          error,
+          `\nCould not add new training type '${this.newTrainingType}' to database.`
+        );
+      }
     },
+    // TODO: exercise type selector must be updated after successfull addition of new exercise type
     async addExerciseType() {
       const translatedNewExerciseType = MapExerciseTypeToString.mapStringToExerciseType(
         this.newExerciseType
       );
-      const response = await AddTrainingService.addExerciseType(
-        translatedNewExerciseType,
-        this.newExerciseTypeTrainingType
-      );
-      console.log(response.data);
+      try {
+        const response = await AddTrainingService.addExerciseType(
+          translatedNewExerciseType,
+          this.newExerciseTypeTrainingType
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.log(
+          error,
+          `\nCould not add new exercise type '${this.newExerciseType}' for training type '${this.newExerciseTypeTrainingType}' to database.`
+        );
+      }
     }
   }
 };

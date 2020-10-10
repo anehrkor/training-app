@@ -224,10 +224,13 @@ export default {
       const translatedNewExerciseType = MapExerciseTypeToString.mapStringToExerciseType(
         this.newExerciseType
       );
+      const translatedNewExerciseTypeTrainingType = MapTrainingTypeToString.mapStringToTrainingType(
+        this.newExerciseTypeTrainingType
+      );
       try {
         const response = await AddTrainingService.addExerciseType(
           translatedNewExerciseType,
-          this.newExerciseTypeTrainingType
+          translatedNewExerciseTypeTrainingType
         );
         console.log(response.data);
       } catch (error) {

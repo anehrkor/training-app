@@ -84,6 +84,7 @@
               <button
                 class="btn btn-secondary btn-sm float-right"
                 title="Click to add new training type"
+                :disabled="newTrainingType.length === 0"
                 @click="addTrainingType"
               >
                 &nbsp;Add training type
@@ -92,12 +93,6 @@
           </div>
           <div class="row">
             <div class="form-group col-md-4">
-              <InputFieldType
-                placeholder="Enter exercise type"
-                @entered:type="enterNewExerciseType"
-              />
-            </div>
-            <div class="form-group col-md-4">
               <InputFieldTrainingChoice
                 label="Training type"
                 selectDefault="Choose type"
@@ -105,9 +100,19 @@
               />
             </div>
             <div class="form-group col-md-4">
+              <InputFieldType
+                placeholder="Enter exercise type"
+                @entered:type="enterNewExerciseType"
+              />
+            </div>
+            <div class="form-group col-md-4">
               <button
                 class="btn btn-secondary btn-sm float-right"
                 title="Click to add new exercise type"
+                :disabled="
+                  newExerciseType.length === 0 ||
+                    newExerciseTypeTrainingType.length === 0
+                "
                 @click="addExerciseType"
               >
                 &nbsp;Add exercise type
